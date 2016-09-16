@@ -25,14 +25,14 @@ class Network:
         # Initialising the Weight Array
         self.weights=[]
         # If Computing for the First Time
-        if(os.stat("ComputedWeights_0.txt").st_size == 0):
+        if(os.stat("Computed_Weights/ComputedWeights_0.txt").st_size == 0):
 
             for (l1,l2) in zip(LayerSize[:-1],LayerSize[1:]):
                 self.weights.append(np.random.normal(scale=0.1,size=(l2,l1+1)))
         else:
             # Load it from the Files
             for index in range(self.layerCount):
-                filename = "ComputedWeights_" + str(index) + ".txt"
+                filename = "Computed_Weights/ComputedWeights_" + str(index) + ".txt"
                 self.weights.append(np.loadtxt(filename))
 
 
@@ -136,7 +136,7 @@ class Network:
     def Write_Computed_Weights_to_file(self):
 
         for x in range(self.layerCount):
-            filename = "ComputedWeights_" + str(x) + ".txt"
+            filename = "Computed_Weights/ComputedWeights_" + str(x) + ".txt"
             f=open(filename,"w")
             np.savetxt(filename,self.weights[x],delimiter=' ')
             f.close()
